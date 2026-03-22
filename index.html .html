@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أدواتي الذكية - سوريا</title>
+    <style>
+        body { font-family: sans-serif; background: #eef2f3; padding: 15px; text-align: center; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; font-size: 1.2rem; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; }
+        button { width: 95%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .result { margin-top: 15px; font-weight: bold; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+    <h1>منصة الأدوات السريعة</h1>
+
+    <div class="card">
+        <h2>1. حاسبة العمولة (USDT/دولار)</h2>
+        <input type="number" id="amount" placeholder="المبلغ الأساسي">
+        <input type="number" id="fee" placeholder="العمولة %" value="5">
+        <button onclick="calcFee()">احسب الصافي</button>
+        <div id="res1" class="result"></div>
+    </div>
+
+    <div class="card">
+        <h2>2. محول العملات (سعر السوق)</h2>
+        <input type="number" id="usd" placeholder="المبلغ بالدولار">
+        <input type="number" id="rate" placeholder="سعر الصرف اليوم (مثلاً 15000)">
+        <button onclick="convert()">حول لليرة السورية</button>
+        <div id="res2" class="result"></div>
+    </div>
+
+    <script>
+        // دالة حاسبة العمولات
+        function calcFee() {
+            let a = document.getElementById('amount').value;
+            let f = document.getElementById('fee').value;
+            let res = a - (a * f / 100);
+            document.getElementById('res1').innerText = "المبلغ الصافي: " + res.toFixed(2);
+        }
+
+        // دالة تحويل العملات
+        function convert() {
+            let u = document.getElementById('usd').value;
+            let r = document.getElementById('rate').value;
+            let res = u * r;
+            document.getElementById('res2').innerText = "القيمة: " + res.toLocaleString() + " ل.س";
+        }
+    </script>
+
+</body>
+</html>
