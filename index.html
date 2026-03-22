@@ -3,51 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أدواتي الذكية - سوريا</title>
+    <title>منصة الأدوات الذكية - سوريا</title>
     <style>
-        body { font-family: sans-serif; background: #eef2f3; padding: 15px; text-align: center; }
-        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; font-size: 1.2rem; }
-        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; }
-        button { width: 95%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 8px; cursor: pointer; }
-        .result { margin-top: 15px; font-weight: bold; color: #2c3e50; }
+        :root { --primary: #1e40af; --secondary: #10b981; --bg: #f1f5f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #1e293b; }
+        .header { background: var(--primary); color: white; padding: 25px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        .card { background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        h2 { color: var(--primary); font-size: 1.1rem; margin-top: 0; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; font-size: 1rem; outline: none; transition: 0.3s; text-align: center; }
+        input:focus { border-color: var(--primary); }
+        button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        button:hover { background: #1e3a8a; }
+        .result-box { margin-top: 15px; padding: 15px; background: #f8fafc; border-radius: 8px; font-weight: bold; border-right: 4px solid var(--secondary); display: none; text-align: center; }
+        .wa-button { background: #25d366; color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: bold; font-size: 1.1rem; transition: 0.3s; }
+        .wa-button:hover { background: #128c7e; transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-    <h1>منصة الأدوات السريعة</h1>
-
-    <div class="card">
-        <h2>1. حاسبة العمولة (USDT/دولار)</h2>
-        <input type="number" id="amount" placeholder="المبلغ الأساسي">
-        <input type="number" id="fee" placeholder="العمولة %" value="5">
-        <button onclick="calcFee()">احسب الصافي</button>
-        <div id="res1" class="result"></div>
+    <div class="header">
+        <h1 style="margin:0; font-size: 1.5rem;">أدواتي الذكية 🛠️</h1>
+        <p style="margin: 5px 0 0; opacity: 0.9;">حلول سريعة للتجار والمستقلين في سوريا</p>
     </div>
 
     <div class="card">
-        <h2>2. محول العملات (سعر السوق)</h2>
+        <h2>💰 حاسبة العمولات والتحويل الصافي</h2>
+        <input type="number" id="amount" placeholder="المبلغ المراد تحويله ($)">
+        <input type="number" id="fee" placeholder="نسبة العمولة %" value="5">
+        <button onclick="calcFee()">احسب الصافي فوراً</button>
+        <div id="res1" class="result-box"></div>
+    </div>
+
+    <div class="card">
+        <h2>🇸🇾 محول العملات (سعر السوق)</h2>
         <input type="number" id="usd" placeholder="المبلغ بالدولار">
         <input type="number" id="rate" placeholder="سعر الصرف اليوم (مثلاً 15000)">
         <button onclick="convert()">حول لليرة السورية</button>
-        <div id="res2" class="result"></div>
+        <div id="res2" class="result-box"></div>
     </div>
 
+    <div class="card" style="border: 2px solid var(--secondary); text-align: center;">
+        <h2 style="color: var(--secondary);">🚀 خدمات تعبئة الرصيد والصرف</h2>
+        <p>هل تريد تعبئة USDT أو صرف مبالغ مالية بأسعار منافسة؟</p>
+        <a href="https://wa.me/963935292846" class="wa-button">
+            تواصل معي الآن عبر واتساب ✅
+        </a>
+    </div>
+
+    <footer style="text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 20px;">
+        جميع الحقوق محفوظة &copy; 2026
+    </footer>
+
     <script>
-        // دالة حاسبة العمولات
         function calcFee() {
             let a = document.getElementById('amount').value;
             let f = document.getElementById('fee').value;
+            if(!a) return;
             let res = a - (a * f / 100);
-            document.getElementById('res1').innerText = "المبلغ الصافي: " + res.toFixed(2);
+            let box = document.getElementById('res1');
+            box.style.display = 'block';
+            box.innerHTML = "المبلغ الصافي: <span style='color:green'>" + res.toFixed(2) + " $</span>";
         }
 
-        // دالة تحويل العملات
         function convert() {
             let u = document.getElementById('usd').value;
             let r = document.getElementById('rate').value;
+            if(!u || !r) return;
             let res = u * r;
-            document.getElementById('res2').innerText = "القيمة: " + res.toLocaleString() + " ل.س";
+            let box = document.getElementById('res2');
+            box.style.display = 'block';
+            box.innerHTML = "القيمة بالليرة: <span style='color:green'>" + res.toLocaleString() + " ل.س</span>";
         }
     </script>
 
