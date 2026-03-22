@@ -7,84 +7,84 @@
     <style>
         :root { --primary: #1e40af; --secondary: #10b981; --gold: #d4af37; --bg: #f1f5f9; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #1e293b; }
-        .header { background: var(--primary); color: white; padding: 25px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
+        .header { background: var(--primary); color: white; padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
         .card { background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .live-card { background: #fff3cd; border: 1px solid #ffeeba; padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
         h2 { color: var(--primary); font-size: 1.1rem; margin-top: 0; }
-        .gold-h2 { color: var(--gold); }
         input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; font-size: 1rem; text-align: center; outline: none; }
-        button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; }
-        button:hover { opacity: 0.9; }
-        .gold-btn { background: var(--gold); }
+        button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1rem; }
         .result-box { margin-top: 15px; padding: 15px; background: #f8fafc; border-radius: 8px; font-weight: bold; border-right: 4px solid var(--secondary); display: none; text-align: center; }
-        .wa-button { background: #25d366; color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: bold; font-size: 1.1rem; }
+        .wa-button { background: #25d366; color: white; text-decoration: none; display: flex; align-items: center; justify-content: center; padding: 15px; border-radius: 10px; margin-top: 20px; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1 style="margin:0; font-size: 1.5rem;">أدواتي الذكية 🛠️</h1>
-        <p style="margin: 5px 0 0; opacity: 0.9;">أسعار الصرف والذهب والعمولات لحظة بلحظة</p>
+        <p style="margin: 5px 0 0; opacity: 0.9;">أسعار الصرف والذهب والعمولات</p>
+    </div>
+
+    <div class="live-card">
+        <h2 style="color: #856404; font-size: 0.9rem; margin-bottom: 5px;">📍 أسعار استرشادية عالمية</h2>
+        <div id="live-prices" style="font-size: 0.85rem; display: flex; justify-content: space-around;">
+            جاري التحميل...
+        </div>
     </div>
 
     <div class="card">
-        <h2 class="gold-h2">✨ حاسبة سعر الذهب (عيار 21)</h2>
+        <h2 style="color: var(--gold);">✨ حاسبة سعر الذهب (عيار 21)</h2>
         <input type="number" id="goldGram" placeholder="عدد الغرامات">
-        <input type="number" id="goldPrice" placeholder="سعر الغرام اليوم بـ ل.س">
-        <button class="gold-btn" onclick="calcGold()">احسب القيمة الإجمالية</button>
+        <input type="number" id="goldPrice" placeholder="سعر الغرام اليوم (ل.س)">
+        <button style="background: var(--gold);" onclick="calcGold()">احسب الإجمالي</button>
         <div id="resGold" class="result-box" style="border-right-color: var(--gold);"></div>
     </div>
 
     <div class="card">
-        <h2>💰 حاسبة العمولات والتحويل الصافي</h2>
-        <input type="number" id="amount" placeholder="المبلغ المراد تحويله ($)">
-        <input type="number" id="fee" placeholder="نسبة العمولة %" value="5">
-        <button onclick="calcFee()">احسب الصافي فوراً</button>
+        <h2>💰 حاسبة العمولات (الصافي)</h2>
+        <input type="number" id="amount" placeholder="المبلغ بالدولار ($)">
+        <input type="number" id="fee" placeholder="العمولة %" value="5">
+        <button onclick="calcFee()">احسب الصافي</button>
         <div id="res1" class="result-box"></div>
-    </div>
-
-    <div class="card">
-        <h2>🇸🇾 محول العملات (سعر السوق)</h2>
-        <input type="number" id="usd" placeholder="المبلغ بالدولار">
-        <input type="number" id="rate" placeholder="سعر الصرف اليوم (مثلاً 15000)">
-        <button onclick="convert()">حول لليرة السورية</button>
-        <div id="res2" class="result-box"></div>
     </div>
 
     <div class="card" style="border: 2px solid var(--secondary); text-align: center;">
         <h2 style="color: var(--secondary);">🚀 خدمات تعبئة الرصيد والصرف</h2>
-        <p>تواصل معنا لتعبئة USDT أو تصريف المبالغ بأفضل الأسعار</p>
+        <p>تواصل معنا لتعبئة USDT أو تصريف المبالغ</p>
         <a href="https://wa.me/963935292846" class="wa-button">تواصل عبر واتساب ✅</a>
     </div>
 
     <script>
+        async function getLivePrices() {
+            try {
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                const data = await response.json();
+                document.getElementById('live-prices').innerHTML = `
+                    <div>💵 USD العالمي: <b>1.00</b></div>
+                    <div>🌍 TRY (تركي): <b>${data.rates.TRY.toFixed(2)}</b></div>
+                `;
+            } catch (e) { document.getElementById('live-prices').innerHTML = "حدث خطأ في التحديث"; }
+        }
+        getLivePrices();
+
         function calcGold() {
             let g = document.getElementById('goldGram').value;
             let p = document.getElementById('goldPrice').value;
-            if(!g || !p) return;
-            let res = g * p;
-            let box = document.getElementById('resGold');
-            box.style.display = 'block';
-            box.innerHTML = "قيمة الذهب: <span style='color:#b8860b'>" + res.toLocaleString() + " ل.س</span>";
+            if(g && p) {
+                let box = document.getElementById('resGold');
+                box.style.display = 'block';
+                box.innerHTML = "قيمة الذهب: " + (g * p).toLocaleString() + " ل.س";
+            }
         }
 
         function calcFee() {
             let a = document.getElementById('amount').value;
             let f = document.getElementById('fee').value;
-            if(!a) return;
-            let res = a - (a * f / 100);
-            let box = document.getElementById('res1');
-            box.style.display = 'block';
-            box.innerHTML = "المبلغ الصافي: <span style='color:green'>" + res.toFixed(2) + " $</span>";
-        }
-
-        function convert() {
-            let u = document.getElementById('usd').value;
-            let r = document.getElementById('rate').value;
-            if(!u || !r) return;
-            let res = u * r;
-            let box = document.getElementById('res2');
-            box.style.display = 'block';
-            box.innerHTML = "القيمة بالليرة: <span style='color:green'>" + res.toLocaleString() + " ل.س</span>";
+            if(a) {
+                let res = a - (a * f / 100);
+                let box = document.getElementById('res1');
+                box.style.display = 'block';
+                box.innerHTML = "المبلغ الصافي: " + res.toFixed(2) + " $";
+            }
         }
     </script>
 </body>
